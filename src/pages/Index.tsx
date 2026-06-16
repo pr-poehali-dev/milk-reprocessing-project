@@ -54,7 +54,7 @@ type OrderType = "retail" | "wholesale";
 export default function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [orderType, setOrderType] = useState<OrderType>("retail");
-  const [form, setForm] = useState({ name: "", phone: "", company: "", product: "", comment: "" });
+  const [form, setForm] = useState({ name: "", phone: "", company: "", city: "", product: "", comment: "" });
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -272,14 +272,14 @@ export default function Index() {
             </div>
 
             <div className="relative">
-              <div className="aspect-[4/5] overflow-hidden">
+              <div className="aspect-[4/5] overflow-hidden bg-[hsl(var(--secondary))]">
                 <img
                   src={PRODUCTS_IMG}
                   alt="Продукция Целинные Луга"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="absolute -bottom-6 -left-6 bg-[hsl(var(--earth-dark))] text-[hsl(var(--cream))] p-6 max-w-[200px]">
+              <div className="absolute -bottom-6 -left-6 bg-[hsl(var(--earth-dark))] text-[hsl(var(--cream))] p-6 max-w-[200px] z-10">
                 <div className="font-serif text-4xl text-[hsl(var(--gold))]">ГОСТ</div>
                 <div className="text-xs font-sans text-[hsl(var(--cream))]/70 mt-1 leading-relaxed">
                   Вся продукция соответствует государственным стандартам
@@ -362,6 +362,18 @@ export default function Index() {
 
               <div>
                 <label className="block text-xs font-sans text-[hsl(var(--cream))]/60 uppercase tracking-wider mb-2">
+                  Ваш город
+                </label>
+                <input
+                  value={form.city}
+                  onChange={(e) => setForm({ ...form, city: e.target.value })}
+                  className="w-full bg-transparent border border-[hsl(var(--cream))]/20 text-[hsl(var(--cream))] placeholder-[hsl(var(--cream))]/30 font-sans text-sm px-4 py-3 focus:outline-none focus:border-[hsl(var(--gold))] transition-colors"
+                  placeholder="Москва"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-sans text-[hsl(var(--cream))]/60 uppercase tracking-wider mb-2">
                   Продукт
                 </label>
                 <select
@@ -410,7 +422,7 @@ export default function Index() {
                 Наш менеджер свяжется с вами в течение 2 рабочих часов
               </p>
               <button
-                onClick={() => { setSubmitted(false); setForm({ name: "", phone: "", company: "", product: "", comment: "" }); }}
+                onClick={() => { setSubmitted(false); setForm({ name: "", phone: "", company: "", city: "", product: "", comment: "" }); }}
                 className="text-[hsl(var(--gold))] font-sans text-sm border border-[hsl(var(--gold))]/40 px-6 py-2 hover:border-[hsl(var(--gold))] transition-colors"
               >
                 Оформить ещё одну заявку
@@ -433,7 +445,7 @@ export default function Index() {
               {
                 icon: "MapPin",
                 title: "Адрес",
-                lines: ["Курганская область,", "г. Курган, ул. Промышленная, 1"],
+                lines: ["Курганская область,", "Целинный район, с. Кислянка"],
               },
               {
                 icon: "Phone",
