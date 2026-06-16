@@ -440,12 +440,17 @@ export default function Index() {
             <h2 className="font-serif text-4xl md:text-5xl text-[hsl(var(--earth-dark))]">Контакты</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
                 icon: "MapPin",
-                title: "Адрес",
+                title: "Производство",
                 lines: ["Курганская область,", "Целинный район, с. Кислянка"],
+              },
+              {
+                icon: "Building2",
+                title: "Офис продаж",
+                lines: ["454007 г. Челябинск,", "ул. 40-летия Октября 19,", "офис 20"],
               },
               {
                 icon: "Phone",
