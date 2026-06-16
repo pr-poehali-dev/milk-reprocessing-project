@@ -137,9 +137,6 @@ export default function Index() {
 
         <div className="relative z-10 max-w-6xl mx-auto px-6 w-full">
           <div className="max-w-2xl">
-            <p className="animate-fade-up opacity-0 delay-100 text-[hsl(var(--gold))] text-xs tracking-[0.3em] uppercase font-sans mb-4">
-              Производство с 2005 года · Курганская область
-            </p>
             <h1 className="animate-fade-up opacity-0 delay-200 font-serif text-5xl md:text-7xl text-[hsl(var(--cream))] leading-tight mb-6">
               Настоящее масло<br />
               <em className="font-light">с целинных лугов</em>
