@@ -481,12 +481,12 @@ export default function Index() {
               {
                 icon: "Phone",
                 title: "Телефон",
-                lines: ["+7 (3522) 00-00-00", "Пн–Пт 8:00–17:00"],
+                lines: ["+7 912 808-76-88", "Пн–Пт 8:00–17:00"],
               },
               {
                 icon: "Mail",
                 title: "Электронная почта",
-                lines: ["info@tselinnyelouga.ru", "Ответим в течение дня"],
+                lines: ["sum-45@bk.ru", "Ответим в течение дня"],
               },
             ].map((c) => (
               <div key={c.title} className="bg-background border border-border p-8 text-center group hover:border-[hsl(var(--earth-light))] transition-colors">
