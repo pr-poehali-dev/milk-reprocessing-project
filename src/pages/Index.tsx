@@ -51,15 +51,36 @@ const navLinks = [
 
 type OrderType = "retail" | "wholesale";
 
+const SEND_ORDER_URL = "https://functions.poehali.dev/171fd9ef-e4a8-4377-86ce-306e01872e25";
+
 export default function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [orderType, setOrderType] = useState<OrderType>("retail");
   const [form, setForm] = useState({ name: "", phone: "", company: "", city: "", product: "", comment: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSending(true);
+    setSendError("");
+    try {
+      const res = await fetch(SEND_ORDER_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, orderType }),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        setSendError("Ошибка при отправке. Попробуйте ещё раз или позвоните нам.");
+      }
+    } catch {
+      setSendError("Ошибка соединения. Проверьте интернет и попробуйте снова.");
+    } finally {
+      setSending(false);
+    }
   };
 
   const scrollTo = (href: string) => {
@@ -402,11 +423,16 @@ export default function Index() {
                 />
               </div>
 
+              {sendError && (
+                <p className="text-red-400 font-sans text-sm text-center">{sendError}</p>
+              )}
+
               <button
                 type="submit"
-                className="w-full bg-[hsl(var(--gold))] text-[hsl(var(--earth-dark))] font-sans font-semibold py-4 hover:bg-[hsl(45,65%,60%)] transition-colors text-base"
+                disabled={sending}
+                className="w-full bg-[hsl(var(--gold))] text-[hsl(var(--earth-dark))] font-sans font-semibold py-4 hover:bg-[hsl(45,65%,60%)] transition-colors text-base disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                Отправить заявку
+                {sending ? "Отправляем..." : "Отправить заявку"}
               </button>
               <p className="text-center text-[hsl(var(--cream))]/40 text-xs font-sans">
                 Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных
