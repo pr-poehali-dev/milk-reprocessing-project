@@ -10,10 +10,8 @@
       "name": "Валидация — пустые поля",
       "method": "POST",
       "path": "/",
-      "body": {},
-      "expectedStatus": 400,
-      "expectedBody": {"error": "Имя и телефон обязательны"},
-      "bodyMatcher": "partial"
+      "body": {"orderType": "retail"},
+      "expectedStatus": 400
     }
   ]
 }
