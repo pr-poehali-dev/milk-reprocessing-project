@@ -1,6 +1,6 @@
 import Icon from "@/components/ui/icon";
 
-const PRODUCTS_IMG = "https://cdn.poehali.dev/projects/88d3f176-cf54-4278-8120-7d30ed406ca7/files/e03c66f2-ed77-41fb-bb9b-e7b7995706b1.jpg";
+const PRODUCTS_IMG = "https://cdn.poehali.dev/projects/88d3f176-cf54-4278-8120-7d30ed406ca7/files/0fff5f68-6804-43dc-aad2-1e75a010c185.jpg";
 
 export const products = [
   {
