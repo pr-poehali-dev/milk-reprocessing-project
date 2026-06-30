@@ -67,8 +67,8 @@ def handler(event: dict, context) -> dict:
     </div>
     """
 
-    email_from = os.environ['EMAIL_TO']
-    email_to = os.environ['EMAIL_TO']
+    email_from = os.environ.get('EMAIL_TO', '')
+    email_to = os.environ.get('EMAIL_TO', '')
     smtp_password = os.environ['SMTP_PASSWORD']
 
     msg = MIMEMultipart('alternative')
