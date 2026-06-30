@@ -81,6 +81,7 @@ def handler(event: dict, context) -> dict:
         server.login(email_from, smtp_password)
         server.sendmail(email_from, [email_to], msg.as_string())
 
+
     return {
         'statusCode': 200,
         'headers': cors,
