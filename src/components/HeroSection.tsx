@@ -95,6 +95,20 @@ export default function HeroSection({ menuOpen, setMenuOpen, scrollTo }: HeroSec
             <p className="animate-fade-up opacity-0 delay-300 text-[hsl(var(--cream))]/75 font-sans text-lg leading-relaxed mb-10 max-w-xl">
               Сливочное масло и маргарин высочайшего качества от производителя Курганской области. Поставляем оптом и в розницу по всей России.
             </p>
+            <div className="animate-fade-up opacity-0 delay-350 flex items-center gap-4 bg-[hsl(var(--gold))]/15 border border-[hsl(var(--gold))]/40 px-6 py-4 mb-6 max-w-xl">
+              <div className="flex-shrink-0 bg-[hsl(var(--gold))] text-[hsl(var(--earth-dark))] font-serif font-bold text-3xl w-16 h-16 flex items-center justify-center">
+                3%
+              </div>
+              <div>
+                <div className="text-[hsl(var(--gold))] font-sans font-semibold text-sm uppercase tracking-wider mb-1">
+                  Специальное предложение
+                </div>
+                <div className="text-[hsl(var(--cream))] font-sans text-base leading-snug">
+                  Скидка <strong>3%</strong> на маргарин 70–80% жирности при заказе от <strong>100 до 1000 кг</strong>
+                </div>
+              </div>
+            </div>
+
             <div className="animate-fade-up opacity-0 delay-400 flex flex-wrap gap-4">
               <button
                 onClick={() => scrollTo("#products")}
