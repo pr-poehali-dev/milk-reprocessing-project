@@ -93,7 +93,7 @@ export default function HeroSection({ menuOpen, setMenuOpen, scrollTo }: HeroSec
               <em className="font-light">с целинных лугов</em>
             </h1>
             <p className="animate-fade-up opacity-0 delay-300 text-[hsl(var(--cream))]/75 font-sans text-lg leading-relaxed mb-10 max-w-xl">
-              Сливочное масло и маргарин высочайшего качества от производителя Курганской области. Поставляем оптом и в розницу по всей России.
+              Производство сливочного масла и маргарина в Курганской области. Оптовые и розничные поставки по всей России.
             </p>
             <div className="animate-fade-up opacity-0 delay-350 flex items-center gap-4 bg-[hsl(var(--gold))]/15 border border-[hsl(var(--gold))]/40 px-6 py-4 mb-6 max-w-xl">
               <div className="flex-shrink-0 bg-[hsl(var(--gold))] text-[hsl(var(--earth-dark))] font-serif font-bold text-3xl w-16 h-16 flex items-center justify-center">
