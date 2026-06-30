@@ -6,7 +6,7 @@ from email.mime.multipart import MIMEMultipart
 
 
 def handler(event: dict, context) -> dict:
-    """Отправка заявки с сайта Целинные Луга на email менеджера через Яндекс SMTP."""
+    """Отправка заявки с сайта Целинные Луга на email менеджера через Mail.ru SMTP."""
 
     cors = {
         'Access-Control-Allow-Origin': '*',
@@ -77,7 +77,7 @@ def handler(event: dict, context) -> dict:
     msg['To'] = email_to
     msg.attach(MIMEText(html_body, 'html', 'utf-8'))
 
-    with smtplib.SMTP_SSL('smtp.yandex.ru', 465) as server:
+    with smtplib.SMTP_SSL('smtp.mail.ru', 465) as server:
         server.login(email_from, smtp_password)
         server.sendmail(email_from, [email_to], msg.as_string())
 
