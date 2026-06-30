@@ -29,6 +29,11 @@ export default function HeroSection({ menuOpen, setMenuOpen, scrollTo }: HeroSec
             </span>
           </div>
 
+          <div className="hidden md:flex items-center gap-6 text-sm font-sans text-[hsl(var(--earth-mid))]">
+            <a href="tel:+79128087688" className="hover:text-[hsl(var(--earth-dark))] transition-colors">+7 912 808-76-88</a>
+            <a href="mailto:sum-45@bk.ru" className="hover:text-[hsl(var(--earth-dark))] transition-colors">sum-45@bk.ru</a>
+          </div>
+
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((l) => (
               <button

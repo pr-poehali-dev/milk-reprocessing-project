@@ -45,7 +45,11 @@ export default function ContactsSection({ onWholesaleClick }: ContactsSectionPro
                 <h4 className="font-sans font-semibold text-[hsl(var(--earth-dark))] mb-3">{c.title}</h4>
                 {c.lines.map((l, i) => (
                   <p key={i} className={`font-sans text-sm ${i === 0 ? "text-[hsl(var(--earth-mid))]" : "text-[hsl(var(--muted-foreground))]"}`}>
-                    {l}
+                    {c.icon === "Phone" && i === 0 ? (
+                      <a href="tel:+79128087688" className="hover:text-[hsl(var(--earth-dark))] transition-colors">{l}</a>
+                    ) : c.icon === "Mail" && i === 0 ? (
+                      <a href="mailto:sum-45@bk.ru" className="hover:text-[hsl(var(--earth-dark))] transition-colors">{l}</a>
+                    ) : l}
                   </p>
                 ))}
               </div>
