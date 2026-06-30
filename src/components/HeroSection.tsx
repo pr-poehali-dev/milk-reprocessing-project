@@ -1,6 +1,6 @@
 import Icon from "@/components/ui/icon";
 
-const HERO_IMG = "https://cdn.poehali.dev/projects/88d3f176-cf54-4278-8120-7d30ed406ca7/files/c6d0c6f5-ed60-4165-9e57-7f01443617e8.jpg";
+const HERO_IMG = "https://cdn.poehali.dev/projects/88d3f176-cf54-4278-8120-7d30ed406ca7/files/d6ba5438-af55-4186-a8d2-cf2faca5e3d7.jpg";
 
 const navLinks = [
   { label: "Продукция", href: "#products" },
