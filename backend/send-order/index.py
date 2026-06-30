@@ -77,7 +77,7 @@ def handler(event: dict, context) -> dict:
     msg['To'] = email_to
     msg.attach(MIMEText(html_body, 'html', 'utf-8'))
 
-    with smtplib.SMTP_SSL('smtp.mail.ru', 465) as server:
+    with smtplib.SMTP_SSL('smtp.reg.ru', 465) as server:
         server.login(email_from, smtp_password)
         server.sendmail(email_from, [email_to], msg.as_string())
 
