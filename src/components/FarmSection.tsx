@@ -68,14 +68,6 @@ export default function FarmSection() {
             </p>
           </div>
 
-          <div className="mb-8 rounded-2xl overflow-hidden h-72 md:h-96">
-            <img
-              src="https://cdn.poehali.dev/projects/88d3f176-cf54-4278-8120-7d30ed406ca7/files/e64cf7a8-f811-4437-b165-72e76efc4fd0.jpg"
-              alt="Цех производства сливочного масла"
-              className="w-full h-full object-cover"
-            />
-          </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {butterSteps.map((step) => (
               <div key={step.num} className="flex gap-5 bg-card border border-border rounded-2xl p-6 items-start">
