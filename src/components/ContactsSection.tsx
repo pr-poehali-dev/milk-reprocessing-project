@@ -63,12 +63,12 @@ export default function ContactsSection({ onWholesaleClick }: ContactsSectionPro
                 Специальные условия, гибкие цены и индивидуальный менеджер для бизнеса
               </p>
             </div>
-            <button
-              onClick={onWholesaleClick}
+            <a
+              href="mailto:info@целинные-луга.рф"
               className="flex-shrink-0 bg-[hsl(var(--gold))] text-[hsl(var(--earth-dark))] font-sans font-semibold px-8 py-3 hover:bg-[hsl(45,65%,60%)] transition-colors whitespace-nowrap"
             >
               Запросить оптовые цены
-            </button>
+            </a>
           </div>
         </div>
       </section>

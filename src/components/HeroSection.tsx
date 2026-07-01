@@ -44,12 +44,12 @@ export default function HeroSection({ menuOpen, setMenuOpen, scrollTo }: HeroSec
                 {l.label}
               </button>
             ))}
-            <button
-              onClick={() => scrollTo("#order")}
+            <a
+              href="mailto:info@целинные-луга.рф"
               className="bg-[hsl(var(--earth-dark))] text-[hsl(var(--cream))] text-sm font-sans font-medium px-5 py-2 hover:bg-[hsl(var(--earth-mid))] transition-colors"
             >
               Оформить заказ
-            </button>
+            </a>
           </nav>
 
           <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
@@ -68,12 +68,12 @@ export default function HeroSection({ menuOpen, setMenuOpen, scrollTo }: HeroSec
                 {l.label}
               </button>
             ))}
-            <button
-              onClick={() => scrollTo("#order")}
+            <a
+              href="mailto:info@целинные-луга.рф"
               className="bg-[hsl(var(--earth-dark))] text-[hsl(var(--cream))] text-sm font-sans font-medium px-5 py-3 text-center"
             >
               Оформить заказ
-            </button>
+            </a>
           </div>
         )}
       </header>
@@ -116,12 +116,12 @@ export default function HeroSection({ menuOpen, setMenuOpen, scrollTo }: HeroSec
               >
                 Смотреть продукцию
               </button>
-              <button
-                onClick={() => scrollTo("#order")}
+              <a
+                href="mailto:info@целинные-луга.рф"
                 className="border border-[hsl(var(--cream))]/50 text-[hsl(var(--cream))] font-sans font-medium px-8 py-3 hover:border-[hsl(var(--cream))] transition-colors"
               >
                 Оформить заказ
-              </button>
+              </a>
             </div>
           </div>
         </div>

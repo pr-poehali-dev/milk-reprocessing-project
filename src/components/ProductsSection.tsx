@@ -102,12 +102,12 @@ export default function ProductsSection({ onOrder }: ProductsSectionProps) {
                     <div className="font-sans text-sm text-[hsl(var(--earth-mid))] font-medium">{p.weight}</div>
                   </div>
                   <div className="ml-auto">
-                    <button
-                      onClick={() => onOrder(p.name)}
+                    <a
+                      href={`mailto:info@целинные-луга.рф?subject=Заказ: ${p.name}`}
                       className="text-xs font-sans font-medium text-[hsl(var(--earth-dark))] border border-[hsl(var(--earth-dark))] px-4 py-2 hover:bg-[hsl(var(--earth-dark))] hover:text-[hsl(var(--cream))] transition-colors"
                     >
                       Заказать
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>
