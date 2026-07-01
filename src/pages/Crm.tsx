@@ -48,6 +48,8 @@ type Client = {
   leads?: Lead[];
 };
 
+const EMPTY_CALL_FORM = { name: "", phone: "", company: "", city: "", product: "", comment: "" };
+
 export default function Crm() {
   const [token, setToken] = useState(() => localStorage.getItem("crm_token") || "");
   const [login, setLogin] = useState("");
@@ -60,6 +62,9 @@ export default function Crm() {
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [loading, setLoading] = useState(false);
   const [dragging, setDragging] = useState<number | null>(null);
+  const [showCallModal, setShowCallModal] = useState(false);
+  const [callForm, setCallForm] = useState(EMPTY_CALL_FORM);
+  const [callSaving, setCallSaving] = useState(false);
 
   const loadLeads = useCallback(async () => {
     if (!token) return;
@@ -102,6 +107,18 @@ export default function Crm() {
   async function openClient(id: number) {
     const data = await api(`client&id=${id}`, "GET", undefined, token);
     setSelectedClient(data);
+  }
+
+  async function saveCall(e: React.FormEvent) {
+    e.preventDefault();
+    if (!callForm.name || !callForm.phone) return;
+    setCallSaving(true);
+    await api("leads", "POST", { ...callForm, order_type: "retail", comment: callForm.comment || "Входящий звонок" }, token);
+    setCallSaving(false);
+    setShowCallModal(false);
+    setCallForm(EMPTY_CALL_FORM);
+    loadLeads();
+    loadClients();
   }
 
   function logout() {
@@ -160,6 +177,13 @@ export default function Crm() {
           <span className="text-[hsl(var(--cream))]/40 text-sm">CRM</span>
         </div>
         <div className="flex items-center gap-4">
+          <button
+            onClick={() => setShowCallModal(true)}
+            className="flex items-center gap-2 bg-[hsl(var(--gold))] text-[hsl(var(--earth-dark))] text-sm font-semibold px-4 py-2 hover:opacity-90 transition-opacity"
+          >
+            <Icon name="PhoneIncoming" size={15} />
+            Записать звонок
+          </button>
           <a href="/" className="text-[hsl(var(--cream))]/60 text-sm hover:text-[hsl(var(--cream))] transition-colors">← На сайт</a>
           <button onClick={logout} className="text-[hsl(var(--cream))]/60 text-sm hover:text-[hsl(var(--cream))] transition-colors">Выйти</button>
         </div>
@@ -311,6 +335,93 @@ export default function Crm() {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Модалка: записать звонок */}
+      {showCallModal && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4" onClick={() => setShowCallModal(false)}>
+          <div className="bg-white rounded border border-border w-full max-w-md shadow-xl p-6" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between mb-5">
+              <div className="flex items-center gap-2">
+                <Icon name="PhoneIncoming" size={18} className="text-[hsl(var(--earth-dark))]" />
+                <h3 className="font-serif text-xl text-[hsl(var(--earth-dark))]">Записать звонок</h3>
+              </div>
+              <button onClick={() => setShowCallModal(false)} className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--earth-dark))]">
+                <Icon name="X" size={20} />
+              </button>
+            </div>
+            <form onSubmit={saveCall} className="flex flex-col gap-3">
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="text-xs text-[hsl(var(--muted-foreground))] uppercase tracking-wide font-sans mb-1 block">Имя *</label>
+                  <input
+                    required
+                    className="w-full border border-border px-3 py-2 text-sm font-sans focus:outline-none focus:border-[hsl(var(--earth-dark))]"
+                    placeholder="Иван Иванов"
+                    value={callForm.name}
+                    onChange={(e) => setCallForm({ ...callForm, name: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label className="text-xs text-[hsl(var(--muted-foreground))] uppercase tracking-wide font-sans mb-1 block">Телефон *</label>
+                  <input
+                    required
+                    className="w-full border border-border px-3 py-2 text-sm font-sans focus:outline-none focus:border-[hsl(var(--earth-dark))]"
+                    placeholder="+7 912 000-00-00"
+                    value={callForm.phone}
+                    onChange={(e) => setCallForm({ ...callForm, phone: e.target.value })}
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="text-xs text-[hsl(var(--muted-foreground))] uppercase tracking-wide font-sans mb-1 block">Компания</label>
+                  <input
+                    className="w-full border border-border px-3 py-2 text-sm font-sans focus:outline-none focus:border-[hsl(var(--earth-dark))]"
+                    placeholder="ООО «Компания»"
+                    value={callForm.company}
+                    onChange={(e) => setCallForm({ ...callForm, company: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label className="text-xs text-[hsl(var(--muted-foreground))] uppercase tracking-wide font-sans mb-1 block">Город</label>
+                  <input
+                    className="w-full border border-border px-3 py-2 text-sm font-sans focus:outline-none focus:border-[hsl(var(--earth-dark))]"
+                    placeholder="Москва"
+                    value={callForm.city}
+                    onChange={(e) => setCallForm({ ...callForm, city: e.target.value })}
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-xs text-[hsl(var(--muted-foreground))] uppercase tracking-wide font-sans mb-1 block">Интерес / продукт</label>
+                <input
+                  className="w-full border border-border px-3 py-2 text-sm font-sans focus:outline-none focus:border-[hsl(var(--earth-dark))]"
+                  placeholder="Масло сливочное, маргарин..."
+                  value={callForm.product}
+                  onChange={(e) => setCallForm({ ...callForm, product: e.target.value })}
+                />
+              </div>
+              <div>
+                <label className="text-xs text-[hsl(var(--muted-foreground))] uppercase tracking-wide font-sans mb-1 block">Комментарий</label>
+                <textarea
+                  rows={2}
+                  className="w-full border border-border px-3 py-2 text-sm font-sans focus:outline-none focus:border-[hsl(var(--earth-dark))] resize-none"
+                  placeholder="Что обсудили, о чём договорились..."
+                  value={callForm.comment}
+                  onChange={(e) => setCallForm({ ...callForm, comment: e.target.value })}
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={callSaving}
+                className="bg-[hsl(var(--earth-dark))] text-[hsl(var(--cream))] py-3 text-sm font-sans font-medium hover:opacity-90 transition-opacity disabled:opacity-60"
+              >
+                {callSaving ? "Сохраняем..." : "Добавить в воронку"}
+              </button>
+            </form>
           </div>
         </div>
       )}
