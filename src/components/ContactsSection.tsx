@@ -56,6 +56,39 @@ export default function ContactsSection({ onWholesaleClick }: ContactsSectionPro
             ))}
           </div>
 
+          {/* Мессенджеры */}
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="https://t.me/+79128087688"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 bg-background border border-border px-6 py-4 hover:border-[hsl(var(--earth-light))] transition-colors min-w-[220px] justify-center"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.93 7.13l-1.68 7.92c-.12.56-.46.7-.93.43l-2.57-1.89-1.24 1.19c-.14.14-.25.25-.51.25l.18-2.6 4.72-4.26c.2-.18-.05-.28-.32-.1L8.34 14.6 5.8 13.82c-.56-.17-.57-.56.12-.83l7.68-2.96c.47-.17.88.12.73.1z" fill="#2AABEE"/>
+              </svg>
+              <div className="text-left">
+                <div className="text-xs text-[hsl(var(--muted-foreground))] font-sans uppercase tracking-wide">Telegram</div>
+                <div className="font-sans text-sm text-[hsl(var(--earth-mid))] font-medium">+7 912 808-76-88</div>
+              </div>
+            </a>
+            <a
+              href="https://max.ru/+79128087688"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 bg-background border border-border px-6 py-4 hover:border-[hsl(var(--earth-light))] transition-colors min-w-[220px] justify-center"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="24" height="24" rx="12" fill="#0077FF"/>
+                <text x="12" y="16" textAnchor="middle" fill="white" fontSize="11" fontWeight="bold" fontFamily="sans-serif">MAX</text>
+              </svg>
+              <div className="text-left">
+                <div className="text-xs text-[hsl(var(--muted-foreground))] font-sans uppercase tracking-wide">MAX</div>
+                <div className="font-sans text-sm text-[hsl(var(--earth-mid))] font-medium">+7 912 808-76-88</div>
+              </div>
+            </a>
+          </div>
+
           <div className="mt-12 bg-[hsl(var(--earth-dark))] p-10 flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
               <h3 className="font-serif text-2xl text-[hsl(var(--cream))] mb-2">Для оптовых покупателей</h3>
