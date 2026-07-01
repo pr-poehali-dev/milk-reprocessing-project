@@ -11,6 +11,7 @@ export const products = [
     desc: "Традиционный рецепт. Натуральные сливки от коров Курганской области.",
     badge: "Хит продаж",
     icon: "Star",
+    img: "https://cdn.poehali.dev/projects/88d3f176-cf54-4278-8120-7d30ed406ca7/files/687e1ed3-3af9-4638-a3ed-d1ed32b0f4f8.jpg",
   },
   {
     id: 2,
@@ -20,6 +21,7 @@ export const products = [
     desc: "Высокое содержание жира, насыщенный вкус. Идеально для выпечки и кулинарии.",
     badge: "Премиум",
     icon: "Award",
+    img: "https://cdn.poehali.dev/projects/88d3f176-cf54-4278-8120-7d30ed406ca7/files/75c9044a-2321-4f2a-8712-fb85930b86eb.jpg",
   },
   {
     id: 3,
@@ -29,6 +31,7 @@ export const products = [
     desc: "Мягкая текстура, лёгкий молочный вкус. Доступная альтернатива для каждого дня.",
     badge: "Экономия",
     icon: "Leaf",
+    img: "https://cdn.poehali.dev/projects/88d3f176-cf54-4278-8120-7d30ed406ca7/files/105cce35-97a9-4e67-8ae4-133e5fc4601d.jpg",
   },
   {
     id: 4,
@@ -38,6 +41,7 @@ export const products = [
     desc: "Пониженная жирность, нежный вкус. Подходит для здорового и сбалансированного питания.",
     badge: "Лёгкий",
     icon: "Wind",
+    img: "https://cdn.poehali.dev/projects/88d3f176-cf54-4278-8120-7d30ed406ca7/files/34e573cc-8602-4616-a736-a533bb70809d.jpg",
   },
   {
     id: 5,
@@ -47,6 +51,7 @@ export const products = [
     desc: "Натуральный молочный вкус, универсален для выпечки и кулинарии.",
     badge: "Молочный",
     icon: "Droplets",
+    img: "https://cdn.poehali.dev/projects/88d3f176-cf54-4278-8120-7d30ed406ca7/files/4500e3d1-0699-4c59-b695-3c9281ce0011.jpg",
   },
   {
     id: 6,
@@ -56,6 +61,7 @@ export const products = [
     desc: "Высокая жирность для профессиональной выпечки. Насыщенный молочный аромат.",
     badge: "Профи",
     icon: "ChefHat",
+    img: "https://cdn.poehali.dev/projects/88d3f176-cf54-4278-8120-7d30ed406ca7/files/ffcebeb6-f0fc-43a7-8386-b62cc1a9643e.jpg",
   },
 ];
 
@@ -80,11 +86,16 @@ export default function ProductsSection({ onOrder }: ProductsSectionProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {products.map((p) => (
               <div key={p.id} className="product-card bg-background border border-border p-8 flex flex-col gap-4">
-                <div className="flex items-start justify-between">
-                  <div className="w-12 h-12 bg-[hsl(var(--secondary))] flex items-center justify-center">
-                    <Icon name={p.icon as "Star"} size={22} fallback="Package" />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-12 h-12 bg-[hsl(var(--secondary))] flex items-center justify-center flex-shrink-0">
+                      <Icon name={p.icon as "Star"} size={22} fallback="Package" />
+                    </div>
+                    <div className="w-16 h-16 rounded overflow-hidden flex-shrink-0 bg-[hsl(var(--secondary))]">
+                      <img src={p.img} alt={p.name} className="w-full h-full object-cover" />
+                    </div>
                   </div>
-                  <span className="text-xs font-sans font-medium tracking-wider uppercase text-[hsl(var(--earth-mid))] bg-[hsl(var(--secondary))] px-3 py-1">
+                  <span className="text-xs font-sans font-medium tracking-wider uppercase text-[hsl(var(--earth-mid))] bg-[hsl(var(--secondary))] px-3 py-1 whitespace-nowrap">
                     {p.badge}
                   </span>
                 </div>
