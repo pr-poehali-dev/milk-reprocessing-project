@@ -33,6 +33,14 @@ export default function FarmSection() {
             </p>
           </div>
 
+          <div className="mb-8 rounded-2xl overflow-hidden h-72 md:h-96">
+            <img
+              src="https://cdn.poehali.dev/projects/88d3f176-cf54-4278-8120-7d30ed406ca7/files/ef0f4baf-48c1-46ae-a2e9-2d468d4c5297.jpg"
+              alt="Молочная ферма с коровами"
+              className="w-full h-full object-cover"
+            />
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {farmFeatures.map((f) => (
               <div key={f.title} className="bg-card border border-border rounded-2xl p-6 flex flex-col gap-3">
