@@ -103,7 +103,7 @@ export default function ProductsSection({ onOrder }: ProductsSectionProps) {
                   </div>
                   <div className="ml-auto">
                     <a
-                      href={`mailto:info@целинные-луга.рф?subject=Заказ: ${p.name}`}
+                      href={`mailto:sum-45@bk.ru?subject=Заказ: ${p.name}`}
                       className="text-xs font-sans font-medium text-[hsl(var(--earth-dark))] border border-[hsl(var(--earth-dark))] px-4 py-2 hover:bg-[hsl(var(--earth-dark))] hover:text-[hsl(var(--cream))] transition-colors"
                     >
                       Заказать

@@ -64,7 +64,7 @@ export default function ContactsSection({ onWholesaleClick }: ContactsSectionPro
               </p>
             </div>
             <a
-              href="mailto:info@целинные-луга.рф"
+              href="mailto:sum-45@bk.ru"
               className="flex-shrink-0 bg-[hsl(var(--gold))] text-[hsl(var(--earth-dark))] font-sans font-semibold px-8 py-3 hover:bg-[hsl(45,65%,60%)] transition-colors whitespace-nowrap"
             >
               Запросить оптовые цены

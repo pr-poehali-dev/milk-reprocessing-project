@@ -45,7 +45,7 @@ export default function HeroSection({ menuOpen, setMenuOpen, scrollTo }: HeroSec
               </button>
             ))}
             <a
-              href="mailto:info@целинные-луга.рф"
+              href="mailto:sum-45@bk.ru"
               className="bg-[hsl(var(--earth-dark))] text-[hsl(var(--cream))] text-sm font-sans font-medium px-5 py-2 hover:bg-[hsl(var(--earth-mid))] transition-colors"
             >
               Оформить заказ
@@ -69,7 +69,7 @@ export default function HeroSection({ menuOpen, setMenuOpen, scrollTo }: HeroSec
               </button>
             ))}
             <a
-              href="mailto:info@целинные-луга.рф"
+              href="mailto:sum-45@bk.ru"
               className="bg-[hsl(var(--earth-dark))] text-[hsl(var(--cream))] text-sm font-sans font-medium px-5 py-3 text-center"
             >
               Оформить заказ
@@ -117,7 +117,7 @@ export default function HeroSection({ menuOpen, setMenuOpen, scrollTo }: HeroSec
                 Смотреть продукцию
               </button>
               <a
-                href="mailto:info@целинные-луга.рф"
+                href="mailto:sum-45@bk.ru"
                 className="border border-[hsl(var(--cream))]/50 text-[hsl(var(--cream))] font-sans font-medium px-8 py-3 hover:border-[hsl(var(--cream))] transition-colors"
               >
                 Оформить заказ
