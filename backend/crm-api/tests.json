@@ -1,0 +1,23 @@
+{
+  "tests": [
+    {
+      "name": "Login - wrong credentials",
+      "method": "POST",
+      "path": "/login",
+      "body": {"username": "wrong", "password": "wrong"},
+      "expectedStatus": 401
+    },
+    {
+      "name": "Leads - unauthorized",
+      "method": "GET",
+      "path": "/leads",
+      "expectedStatus": 401
+    },
+    {
+      "name": "Stats - unauthorized",
+      "method": "GET",
+      "path": "/stats",
+      "expectedStatus": 401
+    }
+  ]
+}
