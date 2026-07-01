@@ -1,23 +1,26 @@
 {
   "tests": [
     {
-      "name": "Login - wrong credentials",
+      "name": "Login wrong credentials",
       "method": "POST",
-      "path": "/login",
+      "path": "/?action=login",
       "body": {"username": "wrong", "password": "wrong"},
-      "expectedStatus": 401
+      "expectedStatus": 401,
+      "bodyMatcher": "partial"
     },
     {
-      "name": "Leads - unauthorized",
+      "name": "Leads unauthorized",
       "method": "GET",
-      "path": "/leads",
-      "expectedStatus": 401
+      "path": "/?action=leads",
+      "expectedStatus": 401,
+      "bodyMatcher": "partial"
     },
     {
-      "name": "Stats - unauthorized",
+      "name": "Stats unauthorized",
       "method": "GET",
-      "path": "/stats",
-      "expectedStatus": 401
+      "path": "/?action=stats",
+      "expectedStatus": 401,
+      "bodyMatcher": "partial"
     }
   ]
 }

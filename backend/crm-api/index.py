@@ -1,11 +1,10 @@
 import json
 import os
 import psycopg2
-from datetime import datetime
 
 CORS_HEADERS = {
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, X-Auth-Token',
 }
 
@@ -23,12 +22,14 @@ def check_auth(event):
     return token == os.environ.get('CRM_TOKEN', '')
 
 def handler(event: dict, context) -> dict:
-    """CRM API: авторизация, лиды, клиенты"""
+    """CRM API: авторизация, лиды, клиенты. action передаётся через query ?action=..."""
     if event.get('httpMethod') == 'OPTIONS':
         return {'statusCode': 200, 'headers': CORS_HEADERS, 'body': ''}
 
-    path = event.get('path', '/')
     method = event.get('httpMethod', 'GET')
+    qs = event.get('queryStringParameters') or {}
+    action = qs.get('action', '')
+
     body = {}
     if event.get('body'):
         try:
@@ -37,7 +38,7 @@ def handler(event: dict, context) -> dict:
             pass
 
     # Авторизация
-    if path == '/login':
+    if action == 'login':
         username = body.get('username', '')
         password = body.get('password', '')
         conn = get_conn()
@@ -46,20 +47,17 @@ def handler(event: dict, context) -> dict:
         row = cur.fetchone()
         conn.close()
         if row:
-            token = os.environ.get('CRM_TOKEN', '')
-            return json_response({'token': token})
+            return json_response({'token': os.environ.get('CRM_TOKEN', '')})
         return err('Неверный логин или пароль', 401)
 
-    # Все остальные маршруты — требуют авторизации
     if not check_auth(event):
         return err('Не авторизован', 401)
 
     conn = get_conn()
     cur = conn.cursor()
-
     try:
-        # --- ЛИДЫ ---
-        if path == '/leads' and method == 'GET':
+        # ЛИДЫ
+        if action == 'leads' and method == 'GET':
             cur.execute("""
                 SELECT l.id, l.product, l.comment, l.status, l.order_type, l.created_at, l.updated_at,
                        c.id as client_id, c.name, c.phone, c.email, c.company, c.city
@@ -68,15 +66,13 @@ def handler(event: dict, context) -> dict:
                 ORDER BY l.created_at DESC
             """)
             cols = [d[0] for d in cur.description]
-            rows = [dict(zip(cols, r)) for r in cur.fetchall()]
-            return json_response(rows)
+            return json_response([dict(zip(cols, r)) for r in cur.fetchall()])
 
-        if path == '/leads' and method == 'POST':
+        if action == 'leads' and method == 'POST':
             name = body.get('name', '').strip()
             phone = body.get('phone', '').strip()
             if not name or not phone:
                 return err('Имя и телефон обязательны')
-            # Найти или создать клиента
             cur.execute("SELECT id FROM clients WHERE phone = %s", (phone,))
             client = cur.fetchone()
             if client:
@@ -93,22 +89,18 @@ def handler(event: dict, context) -> dict:
             conn.commit()
             return json_response({'id': lead_id, 'client_id': client_id})
 
-        if path.startswith('/leads/') and method == 'PUT':
-            lead_id = path.split('/')[-1]
+        if action == 'update_lead' and method == 'POST':
+            lead_id = body.get('id')
             status = body.get('status')
             comment = body.get('comment')
             product = body.get('product')
-            sets = []
-            vals = []
-            if status:
-                sets.append('status=%s')
-                vals.append(status)
+            sets, vals = [], []
+            if status is not None:
+                sets.append('status=%s'); vals.append(status)
             if comment is not None:
-                sets.append('comment=%s')
-                vals.append(comment)
+                sets.append('comment=%s'); vals.append(comment)
             if product is not None:
-                sets.append('product=%s')
-                vals.append(product)
+                sets.append('product=%s'); vals.append(product)
             if sets:
                 sets.append('updated_at=NOW()')
                 vals.append(lead_id)
@@ -116,21 +108,19 @@ def handler(event: dict, context) -> dict:
                 conn.commit()
             return json_response({'ok': True})
 
-        # --- КЛИЕНТЫ ---
-        if path == '/clients' and method == 'GET':
+        # КЛИЕНТЫ
+        if action == 'clients' and method == 'GET':
             cur.execute("""
                 SELECT c.*, COUNT(l.id) as leads_count
                 FROM clients c
                 LEFT JOIN leads l ON l.client_id = c.id
-                GROUP BY c.id
-                ORDER BY c.created_at DESC
+                GROUP BY c.id ORDER BY c.created_at DESC
             """)
             cols = [d[0] for d in cur.description]
-            rows = [dict(zip(cols, r)) for r in cur.fetchall()]
-            return json_response(rows)
+            return json_response([dict(zip(cols, r)) for r in cur.fetchall()])
 
-        if path.startswith('/clients/') and method == 'GET':
-            client_id = path.split('/')[-1]
+        if action == 'client' and method == 'GET':
+            client_id = qs.get('id')
             cur.execute("SELECT * FROM clients WHERE id=%s", (client_id,))
             cols = [d[0] for d in cur.description]
             row = cur.fetchone()
@@ -142,8 +132,8 @@ def handler(event: dict, context) -> dict:
             client['leads'] = [dict(zip(cols2, r)) for r in cur.fetchall()]
             return json_response(client)
 
-        # --- СТАТИСТИКА ---
-        if path == '/stats' and method == 'GET':
+        # СТАТИСТИКА
+        if action == 'stats':
             cur.execute("SELECT COUNT(*) FROM leads")
             total = cur.fetchone()[0]
             cur.execute("SELECT status, COUNT(*) FROM leads GROUP BY status")
@@ -152,7 +142,6 @@ def handler(event: dict, context) -> dict:
             clients_count = cur.fetchone()[0]
             return json_response({'total_leads': total, 'by_status': by_status, 'clients_count': clients_count})
 
-        return err('Маршрут не найден', 404)
-
+        return err('Неизвестный action', 404)
     finally:
         conn.close()
