@@ -2,6 +2,7 @@ import { useState } from "react";
 import HeroSection from "@/components/HeroSection";
 import ProductsSection from "@/components/ProductsSection";
 import FarmSection from "@/components/FarmSection";
+import ChocolateSection from "@/components/ChocolateSection";
 import ContactsSection from "@/components/ContactsSection";
 
 export default function Index() {
@@ -21,6 +22,7 @@ export default function Index() {
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <HeroSection menuOpen={menuOpen} setMenuOpen={setMenuOpen} scrollTo={scrollTo} />
       <ProductsSection onOrder={() => scrollTo("#contacts")} />
+      <ChocolateSection />
       <FarmSection />
       <ContactsSection onWholesaleClick={handleWholesaleClick} />
     </div>
