@@ -134,6 +134,9 @@ export default function ProductsSection({ onOrder }: ProductsSectionProps) {
               </div>
             ))}
           </div>
+          <p className="text-center font-sans text-sm text-[hsl(var(--muted-foreground))] mt-8">
+            Индивидуальные скидки при объёме — обсуждаются.
+          </p>
         </div>
       </section>
 
