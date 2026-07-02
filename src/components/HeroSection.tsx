@@ -4,6 +4,7 @@ const HERO_IMG = "https://cdn.poehali.dev/projects/88d3f176-cf54-4278-8120-7d30e
 
 const navLinks = [
   { label: "Продукция", href: "#products" },
+  { label: "Шоколад", href: "#chocolate" },
   { label: "О производстве", href: "#about" },
   { label: "Контакты", href: "#contacts" },
 ];
