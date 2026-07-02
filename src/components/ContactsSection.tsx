@@ -1,10 +1,32 @@
+import { useState } from "react";
 import Icon from "@/components/ui/icon";
+
+const productOptions = [
+  "Масло сливочное «Крестьянское» 72,5%",
+  "Масло сливочное «Классическое» 82,5%",
+  "Маргарин сливочно-растительный 72,5%",
+  "Маргарин «Лёгкий» сливочно-растительный 60%",
+  "Маргарин молочный 72%",
+  "Маргарин молочный 80%",
+  "Конфеты шоколадные — Тёмный шоколад",
+  "Конфеты шоколадные — Молочный шоколад",
+  "Плитка шоколадная — Тёмный шоколад",
+  "Плитка шоколадная — Молочный шоколад",
+  "Паста орехово-шоколадная",
+  "Паста сливочно-шоколадная",
+];
 
 interface ContactsSectionProps {
   onWholesaleClick: () => void;
 }
 
 export default function ContactsSection({ onWholesaleClick }: ContactsSectionProps) {
+  const [product, setProduct] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+
+  const mailtoHref = `mailto:sum-45@bk.ru?subject=Заказ: ${encodeURIComponent(product || "не выбрано")}&body=${encodeURIComponent(`Товар: ${product}\nИмя: ${name}\nТелефон: ${phone}`)}`;
+
   return (
     <>
       {/* CONTACTS */}
@@ -89,18 +111,44 @@ export default function ContactsSection({ onWholesaleClick }: ContactsSectionPro
             </a>
           </div>
 
-          <div className="mt-12 bg-[hsl(var(--earth-dark))] p-10 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <h3 className="font-serif text-2xl text-[hsl(var(--cream))] mb-2">Для оптовых покупателей</h3>
+          <div className="mt-12 bg-[hsl(var(--earth-dark))] p-10">
+            <div className="mb-8">
+              <h3 className="font-serif text-2xl text-[hsl(var(--cream))] mb-2">Оформить заявку</h3>
               <p className="text-[hsl(var(--cream))]/60 font-sans text-sm">
-                Специальные условия, гибкие цены и индивидуальный менеджер для бизнеса
+                Выберите товар, оставьте контакты — перезвоним и обсудим условия
               </p>
             </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+              <select
+                value={product}
+                onChange={(e) => setProduct(e.target.value)}
+                className="bg-[hsl(var(--cream))]/10 border border-[hsl(var(--cream))]/20 text-[hsl(var(--cream))] font-sans text-sm px-4 py-3 focus:outline-none focus:border-[hsl(var(--gold))] transition-colors"
+              >
+                <option value="" disabled className="text-[hsl(var(--earth-dark))]">Выберите товар</option>
+                {productOptions.map((o) => (
+                  <option key={o} value={o} className="text-[hsl(var(--earth-dark))]">{o}</option>
+                ))}
+              </select>
+              <input
+                type="text"
+                placeholder="Ваше имя"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="bg-[hsl(var(--cream))]/10 border border-[hsl(var(--cream))]/20 text-[hsl(var(--cream))] placeholder:text-[hsl(var(--cream))]/30 font-sans text-sm px-4 py-3 focus:outline-none focus:border-[hsl(var(--gold))] transition-colors"
+              />
+              <input
+                type="tel"
+                placeholder="Телефон"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="bg-[hsl(var(--cream))]/10 border border-[hsl(var(--cream))]/20 text-[hsl(var(--cream))] placeholder:text-[hsl(var(--cream))]/30 font-sans text-sm px-4 py-3 focus:outline-none focus:border-[hsl(var(--gold))] transition-colors"
+              />
+            </div>
             <a
-              href="mailto:sum-45@bk.ru"
-              className="flex-shrink-0 bg-[hsl(var(--gold))] text-[hsl(var(--earth-dark))] font-sans font-semibold px-8 py-3 hover:bg-[hsl(45,65%,60%)] transition-colors whitespace-nowrap"
+              href={mailtoHref}
+              className="inline-block bg-[hsl(var(--gold))] text-[hsl(var(--earth-dark))] font-sans font-semibold px-8 py-3 hover:bg-[hsl(45,65%,60%)] transition-colors"
             >
-              Запросить оптовые цены
+              Отправить заявку
             </a>
           </div>
         </div>
