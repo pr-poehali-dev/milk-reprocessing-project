@@ -12,6 +12,7 @@ export const products = [
     badge: "Хит продаж",
     icon: "Star",
     img: "https://cdn.poehali.dev/projects/88d3f176-cf54-4278-8120-7d30ed406ca7/files/687e1ed3-3af9-4638-a3ed-d1ed32b0f4f8.jpg",
+    price: "600 руб/кг",
   },
   {
     id: 2,
@@ -22,6 +23,7 @@ export const products = [
     badge: "Премиум",
     icon: "Award",
     img: "https://cdn.poehali.dev/projects/88d3f176-cf54-4278-8120-7d30ed406ca7/files/75c9044a-2321-4f2a-8712-fb85930b86eb.jpg",
+    price: "750 руб/кг",
   },
   {
     id: 3,
@@ -32,6 +34,7 @@ export const products = [
     badge: "Экономия",
     icon: "Leaf",
     img: "https://cdn.poehali.dev/projects/88d3f176-cf54-4278-8120-7d30ed406ca7/files/105cce35-97a9-4e67-8ae4-133e5fc4601d.jpg",
+    price: "320 руб/кг",
   },
   {
     id: 4,
@@ -42,6 +45,7 @@ export const products = [
     badge: "Лёгкий",
     icon: "Wind",
     img: "https://cdn.poehali.dev/projects/88d3f176-cf54-4278-8120-7d30ed406ca7/files/34e573cc-8602-4616-a736-a533bb70809d.jpg",
+    price: "под заказ",
   },
   {
     id: 5,
@@ -52,6 +56,7 @@ export const products = [
     badge: "Молочный",
     icon: "Droplets",
     img: "https://cdn.poehali.dev/projects/88d3f176-cf54-4278-8120-7d30ed406ca7/files/4500e3d1-0699-4c59-b695-3c9281ce0011.jpg",
+    price: "375 руб/кг",
   },
   {
     id: 6,
@@ -62,6 +67,7 @@ export const products = [
     badge: "Профи",
     icon: "ChefHat",
     img: "https://cdn.poehali.dev/projects/88d3f176-cf54-4278-8120-7d30ed406ca7/files/ffcebeb6-f0fc-43a7-8386-b62cc1a9643e.jpg",
+    price: "392 руб/кг",
   },
 ];
 
@@ -111,6 +117,10 @@ export default function ProductsSection({ onOrder }: ProductsSectionProps) {
                   <div>
                     <div className="text-xs text-[hsl(var(--muted-foreground))] font-sans uppercase tracking-wide">Фасовка</div>
                     <div className="font-sans text-sm text-[hsl(var(--earth-mid))] font-medium">{p.weight}</div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-[hsl(var(--muted-foreground))] font-sans uppercase tracking-wide">Цена</div>
+                    <div className="font-serif text-xl text-[hsl(var(--gold))] font-semibold">{p.price}</div>
                   </div>
                   <div className="ml-auto">
                     <a
